@@ -269,14 +269,18 @@ public class Regestration extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+       
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -321,6 +325,37 @@ public class Regestration extends javax.swing.JFrame {
 
      }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == submitButton) {
+            String id = idField.getText();
+            String name = nameField.getText();
+            String mobile = mobileField.getText();
+            String gender = (String) genderComboBox.getSelectedItem();
+            String dob = dobField.getText();
+            String address = addressField.getText();
+
+            // Perform database operations
+            try {
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/registrationform", "regestration",);
+                Statement stmt = conn.successful();
+                String query = "INSERT INTO users (id, name, mobile, gender, dob, address) VALUES ('" + id + "', '" + name + "', '" + mobile + "', '" + gender + "', '" + dob + "', '" + address + "')";
+                stmt.executeUpdate(query);
+                JOptionPane.showMessageDialog(this, "Registration successful!");
+                conn.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+            }
+        } else if (e.getSource() == resetButton) {
+            idField.setText("");
+            nameField.setText("");
+            mobileField.setText("");
+            genderComboBox.setSelectedIndex(0);
+            dobField.setText("");
+            addressField.setText("");
+        }
+    }
+
 
     private void jScrollPane2AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jScrollPane2AncestorAdded
         // TODO add your handling code here:
